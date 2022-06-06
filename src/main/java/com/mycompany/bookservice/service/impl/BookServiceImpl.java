@@ -86,4 +86,15 @@ public class BookServiceImpl implements BookService {
         }
         return bookDtos;
     }
+
+    @Override
+    public BookDTO getBook(Long bookId) {
+        Optional<BookEntity> optBook = bookRepository.findById(bookId);
+        BookDTO bookDTO = null;
+        if(optBook.isPresent()){
+            bookDTO = new BookDTO();
+            BeanUtils.copyProperties(optBook.get(), bookDTO);
+        }
+        return bookDTO;
+    }
 }

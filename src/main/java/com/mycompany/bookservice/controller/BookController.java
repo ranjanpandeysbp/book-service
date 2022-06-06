@@ -31,6 +31,13 @@ public class BookController {
         return responseEntity;
     }
 
+    @GetMapping("/books/{bookId}")
+    public ResponseEntity<BookDTO> getBook(@PathVariable Long bookId){
+        BookDTO bookDTO = bookService.getBook(bookId);
+        ResponseEntity<BookDTO> responseEntity = new ResponseEntity<>(bookDTO, HttpStatus.OK);
+        return responseEntity;
+    }
+
     @PutMapping("/books/{bookId}")
     public ResponseEntity<BookDTO> updateBook(@RequestBody BookDTO bookDTO, @PathVariable Long bookId){
         bookDTO = bookService.updateBook(bookDTO, bookId);
@@ -50,5 +57,4 @@ public class BookController {
         bookService.deleteBook(bookId);
         return HttpStatus.NO_CONTENT;
     }
-
 }
